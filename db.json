@@ -1,0 +1,53 @@
+{
+    "files": [
+        {
+            "id": 1,
+            "name": "Universidad",
+            "type": "Folder",
+            "permissions": "rwx-rwx-rwx",
+            "owner": "Soy yo"
+        },
+        {
+            "id": 1,
+            "name": "Cursos",
+            "type": "Folder",
+            "permissions": "rwx-rwx-rwx",
+            "owner": "Soy yo"
+        },
+        {
+            "id": 1,
+            "name": "Tareas",
+            "type": "Folder",
+            "permissions": "rwx-rwx-rwx",
+            "owner": "Soy yo"
+        },
+        {
+            "id": 1,
+            "name": "Proyectos",
+            "type": "Folder",
+            "permissions": "rwx-rwx-rwx",
+            "owner": "Soy yo"
+        },
+        {
+            "id": 1,
+            "name": "Script.py",
+            "type": "File",
+            "permissions": "rwx-rwx-rwx",
+            "owner": "Soy yo"
+        },
+        {
+            "id": 1,
+            "name": "File.txt",
+            "type": "File",
+            "permissions": "rwx-rwx-rwx",
+            "owner": "Soy yo"
+        },
+        {
+            "id": 1,
+            "name": "Simulación.sml",
+            "type": "File",
+            "permissions": "rwx-rwx-rwx",
+            "owner": "Soy yo"
+        }
+    ]
+}
