@@ -1,34 +1,33 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getFiles } from '../../actions/filesActions';
 
 import Element from './Element';
 
 const List = () => {
 
     // Data
-    const elements = [
-        {name: "Tareas", type: "Folder"},
-        {name: "Universidad", type: "Folder"},
-        {name: "Proyectos", type: "Folder"},
-        {name: "Curso React", type: "Folder"},
-        {name: "Notas.txt", type: "File"},
-        {name: "Script.py", type: "File"},
-        {name: "Pylint.py", type: "File"},
-        {name: "Simul.sml", type: "File"},
-        {name: "Simul.sml", type: "File"},
-        {name: "Simul.sml", type: "File"},
-        {name: "Simul.sml", type: "File"},
-        {name: "Script.js", type: "File"}
-    ];
+    const files = useSelector( state => state.files.files );
+    const path = useSelector( state => state.files.path );
+
+    const dispatch = useDispatch();
+
+    useEffect( () => {
+        //Get files API
+        const loadFiles = () => dispatch( getFiles() );
+        loadFiles();
+    }, [])
 
     return (
         <Fragment>
-            <h2>/home/User/Universidad</h2>
+            <h2>{path}</h2>
             <div className="col-12 p-3 row">
-                {elements.length === 0
+                {files.length === 0
                     ? (<li className="element"><p>Esta carpeta está vacía.</p></li>) 
-                    : elements.map(e => (
+                    : files.map(e => (
                         <Element 
                             element={e}
+                            key={e.id}
                         />
                       )) 
                 }
