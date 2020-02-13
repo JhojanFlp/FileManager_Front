@@ -8,10 +8,17 @@ import {
     FILES_ERROR,
     ADD_FILE,
     ADD_FILE_SUCCESS,
-    ADD_FILE_ERROR
+    ADD_FILE_ERROR,
+    DELETE,
+    DELETE_SUCCESS,
+    DELETE_ERROR,
+    EDIT,
+    EDIT_SUCCESS,
+    EDIT_ERROR
 } from '../types';
 
 import clientAxios from '../config/axios';
+import Swal from 'sweetalert2';
 
 // Load Files
 export function getFiles(){
@@ -47,6 +54,7 @@ export function newFolder(folder){
         try {
             await clientAxios.post('/files', folder);
             dispatch( addFolderSuccess(folder) );
+            dispatch(getFiles());
         } catch (error) {
             dispatch( addFolderError(true) );
         }
@@ -67,13 +75,14 @@ const addFolderError = state => ({
     payload: state
 }) 
 
-// New Foile
+// New File
 export function newFile(file){
     return async (dispatch) => {
         dispatch( addFile() );
         try {
             await clientAxios.post('/files', file);
             dispatch( addFileSuccess(file) );
+            dispatch(getFiles());
         } catch (error) {
             dispatch( addFileError(true) );
         }
@@ -93,3 +102,68 @@ const addFileError = state => ({
     type: ADD_FILE_ERROR,
     payload: state
 }) 
+
+// Delete
+
+export function deleteElement(id){
+    return async (dispatch) => {
+        dispatch( deleteFile() );
+        try {
+            await clientAxios.delete(`/files/${id}`);
+            dispatch( deleteSuccess(id) );
+            Swal.fire(
+                'Eliminado!',
+                'Tu archivo ha sido eliminado.',
+                'success'
+            )
+        } catch (error) {
+            dispatch( deleteError(true) );
+        }
+    }
+}
+
+const deleteFile = () => ({
+    type: DELETE
+})
+
+const deleteSuccess = id => ({
+    type: DELETE_SUCCESS,
+    payload: id
+})
+
+const deleteError = state => ({
+    type: DELETE_ERROR,
+    payload: state
+}) 
+
+// Edit
+export function edit(file){
+    return async (dispatch) => {
+        dispatch( editFile() );
+        try {
+            clientAxios.put(`/files/${file.id}`, file);
+            dispatch( editSuccess(file) );
+            Swal.fire(
+                'Editado!',
+                'Se ha editado correctamente.',
+                'success'
+            )
+        } catch (error) {
+            dispatch( editError(true));
+        }
+    }
+}
+
+const editFile = () => ({
+    type: EDIT
+})
+
+const editSuccess = file => ({
+    type: EDIT_SUCCESS,
+    payload: file
+})
+
+const editError = state => ({
+    type: EDIT_ERROR,
+    payload: state
+})

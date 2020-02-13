@@ -30,7 +30,7 @@ const NewFolder = () => {
             sw = true;
         }
         files.forEach(file => {
-            if((file.name === name.trim()) && file.type === "Folder"){
+            if((file.name.toUpperCase()  === name.trim().toUpperCase() ) && file.type === "Folder"){
                 sw = true;
             }
         });

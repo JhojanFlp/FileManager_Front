@@ -4,7 +4,7 @@
       "id": 0,
       "name": "home",
       "type": "Folder",
-      "permissions": "rwx-rwx-rwx",
+      "permissions": "rwxrwxrwx",
       "owner": "Soy yo",
       "path": "/"
     },
@@ -12,7 +12,7 @@
       "id": 1,
       "name": "bin",
       "type": "Folder",
-      "permissions": "rwx-rwx-rwx",
+      "permissions": "rwxrwxrwx",
       "owner": "Soy yo",
       "path": "/"
     },
@@ -20,14 +20,14 @@
       "id": 2,
       "name": "dev",
       "type": "Folder",
-      "permissions": "rwx-rwx-rwx",
+      "permissions": "rwxrwxrwx",
       "owner": "Soy yo",
       "path": "/"
     },
     {
       "name": "etc",
       "type": "Folder",
-      "permissions": "rwx-rwx-rwx",
+      "permissions": "rwxrwxrwx",
       "owner": "Soy yo",
       "path": "/",
       "id": 3
@@ -35,7 +35,7 @@
     {
       "name": "lib",
       "type": "Folder",
-      "permissions": "rwx-rwx-rwx",
+      "permissions": "rwxrwxrwx",
       "owner": "Soy yo",
       "path": "/",
       "id": 4
@@ -43,7 +43,7 @@
     {
       "name": "bin",
       "type": "Folder",
-      "permissions": "rwx-rwx-rwx",
+      "permissions": "rwxrwxrwx",
       "owner": "Soy yo",
       "path": "/",
       "id": 5
@@ -51,7 +51,7 @@
     {
       "name": "doc",
       "type": "File",
-      "permissions": "rwx-rwx-rwx",
+      "permissions": "rwxrwxrwx",
       "owner": "Soy yo",
       "path": "/",
       "id": 6
@@ -59,18 +59,27 @@
     {
       "name": "doc.txt",
       "type": "File",
-      "permissions": "rwx-rwx-rwx",
+      "permissions": "rwxr--rwx",
       "owner": "Soy yo",
       "path": "/",
       "id": 7
     },
     {
-      "name": "lib",
+      "name": "Script.py",
       "type": "File",
-      "permissions": "rwx-rwx-rwx",
+      "permissions": "rwx-w-rwx",
       "owner": "Soy yo",
       "path": "/",
-      "id": 8
+      "id": 8,
+      "ur": true,
+      "uw": true,
+      "ue": true,
+      "gr": false,
+      "gw": true,
+      "ge": false,
+      "or": true,
+      "ow": true,
+      "oe": true
     }
   ]
 }

@@ -9,6 +9,12 @@ import {
     ADD_FILE,
     ADD_FILE_SUCCESS,
     ADD_FILE_ERROR,
+    DELETE,
+    DELETE_SUCCESS,
+    DELETE_ERROR,
+    EDIT,
+    EDIT_SUCCESS,
+    EDIT_ERROR
 } from '../types';
 
 // initial state
@@ -20,6 +26,8 @@ const initialState = {
 
 export default function(state = initialState, action){
     switch(action.type){
+        case EDIT:
+        case DELETE:
         case ADD_FILE:
         case ADD_FOLDER:
         case FILES:
@@ -34,6 +42,9 @@ export default function(state = initialState, action){
                 files: [...state.files, action.payload],
                 error: null
             }
+        case EDIT_ERROR:
+        case FILES_ERROR:
+        case DELETE_ERROR:
         case ADD_FILE_ERROR:
         case ADD_FOLDER_ERROR:
             return{
@@ -43,13 +54,21 @@ export default function(state = initialState, action){
         case FILES_SUCCESS:
             return{
                 ...state,
-                error: false,
+                error: null,
                 files: action.payload
             }
-        case FILES_ERROR:
+        case DELETE_SUCCESS:
             return{
                 ...state,
-                error: action.payload
+                error: null,
+                files: state.files.filter( file => action.payload !== file.id)
+            }
+        case EDIT_SUCCESS:
+            return{
+                ...state,
+                error: null,
+                files: state.files.map( file => file.id === action.payload.id ? file = action.payload : file
+                )
             }
         default:
             return state;

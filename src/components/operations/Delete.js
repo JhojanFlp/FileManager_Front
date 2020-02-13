@@ -4,9 +4,9 @@ import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input , Alert }
 import Swal from 'sweetalert2';
 
 // Redux
-import { newFile } from '../../actions/filesActions';
+import { deleteElement } from '../../actions/filesActions';
 
-const NewFile = () => {
+const Delete = () => {
 
     // State modal
     const [ modal, setModal ] = useState(false);
@@ -16,62 +16,61 @@ const NewFile = () => {
     const [ name, setName ] = useState("");
 
     const dispatch = useDispatch();
-    const addFile = folder => dispatch( newFile(folder) );
+    const del= element => dispatch( deleteElement(element) );
 
     // State store
     const files = useSelector( state => state.files.files);
-    const path = useSelector( state => state.files.path );
     const error = useSelector( state => state.files.error );
 
-    const submitNewFolder = e => {
+    const deleteFile = e => {
         let sw = false;
+        let swFile = false;
+        let f;
         e.preventDefault();
         if(name.trim() === ''){
             sw = true;
         }
         files.forEach(file => {
-            if((file.name.toUpperCase()  === name.trim().toUpperCase() ) && file.type === "File"){
-                sw = true;
+            if(file.name === name.trim()){
+                swFile = true;
+                f = file;
             }
         });
-        if(sw){
+        if(sw || !swFile){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Ingrese un nombre válido o no existente!'
+                text: 'Ingrese un nombre válido!'
             })
             return;
         }
-        addFile({
-            name,
-            type : "File",
-            permissions: "rwx-rwx-rwx",
-            owner: "Soy yo",
-            path: path
+        console.log(f)
+        del({
+            f
         });
         toggle();
     }
 
     return (
         <Fragment>
-            <Button color="success" size="lg" block onClick={toggle}>Nueva Archivo</Button>
+            <Button color="danger" size="lg" block onClick={toggle}>Eliminar</Button>
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Nuevo archivo</ModalHeader>
+                <ModalHeader toggle={toggle}>Eliminar</ModalHeader>
                 <ModalBody>
                     <Form
-                        onSubmit={submitNewFolder}
+                        onSubmit={deleteFile}
                     >
                         <FormGroup>
                             <Input 
                                 name="file"
                                 id="newFile" 
-                                placeholder="doc, doc.txt, ..."
+                                placeholder="Nombre de la carpeta o archivo"
                                 value={name}
                                 onChange={e => setName(e.target.value)}
                             />
                         </FormGroup>
                         <div className="row justify-content-center"> 
-                            <Button color="success" size="lg">Agregar</Button>
+                            <Button color="success" size="lg">Eliminar</Button>
                         </div>
                     </Form>
                     { error ? <Alert color="danger" className="mt-3 text-center">Error</Alert> : null}
@@ -81,4 +80,4 @@ const NewFile = () => {
     );
 }
  
-export default NewFile;
+export default Delete;

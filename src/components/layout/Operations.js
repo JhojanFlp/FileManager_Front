@@ -10,16 +10,13 @@ const Operations = () => {
             
             <NewFolder />
             <NewFile />
-
-            <button
+            {/* <button
                 type="button"
                 className="btn btn-secondary btn-lg btn-block"
-            >Renombrar</button>  
+            >Renombrar</button>   */}
+            {/* <Delete />   */}
 
-            <button
-                type="button"
-                className="btn btn-danger btn-lg btn-block"
-            >Eliminar</button>  
+            
 
             <button
                 type="button"
@@ -31,7 +28,7 @@ const Operations = () => {
                 className="btn btn-info btn-lg btn-block"
             >Cortar / Mover</button>  
 
-            <button
+            {/* <button
                 type="button"
                 className="btn btn-warning btn-lg btn-block"
             >Ver permisos</button>  
@@ -44,7 +41,7 @@ const Operations = () => {
             <button
                 type="button"
                 className="btn btn-warning btn-lg btn-block"
-            >Cambiar propietario</button>          
+            >Cambiar propietario</button>           */}
         </div>
     );
 }
