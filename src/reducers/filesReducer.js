@@ -14,7 +14,8 @@ import {
     DELETE_ERROR,
     EDIT,
     EDIT_SUCCESS,
-    EDIT_ERROR
+    EDIT_ERROR,
+    SET_FILES
 } from '../types';
 
 // initial state
@@ -69,6 +70,11 @@ export default function(state = initialState, action){
                 error: null,
                 files: state.files.map( file => file.id === action.payload.id ? file = action.payload : file
                 )
+            }
+        case SET_FILES:
+            return {
+                ...state,
+                currentFiles: action.files
             }
         default:
             return state;

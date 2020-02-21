@@ -1,0 +1,1 @@
+export const refreshPage = () => window.location =  window.location;

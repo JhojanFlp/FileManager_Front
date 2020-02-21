@@ -17,3 +17,5 @@ export const DELETE_ERROR = 'DELETE';
 export const EDIT = 'EDIT';
 export const EDIT_SUCCESS = 'EDIT_SUCCESS';
 export const EDIT_ERROR = 'EDIT';
+
+export const SET_FILES = "SET_FILES";

@@ -3,8 +3,8 @@ import { useDispatch, useSelector} from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input , Alert } from 'reactstrap';
 import Swal from 'sweetalert2';
 
-// Redux
-import { newFolder } from '../../actions/filesActions';
+import addFolderPost from '../../services/addFolderPost';
+import {refreshPage} from '../../helpers/refreshPage';
 
 const NewFolder = () => {
 
@@ -16,7 +16,7 @@ const NewFolder = () => {
     const [ name, setName ] = useState("");
 
     const dispatch = useDispatch();
-    const addFolder = folder => dispatch( newFolder(folder) );
+    // const addFolder = folder => dispatch( newFolder(folder) );
 
     // State store
     const files = useSelector( state => state.files.files);
@@ -42,13 +42,10 @@ const NewFolder = () => {
             })
             return;
         }
-        addFolder({
+        addFolderPost({
             name,
-            type : "Folder",
-            permissions: "rwx-rwx-rwx",
-            owner: "Soy yo",
-            path: path
-        });
+            type : "Folder"
+        })
         toggle();
     }
 

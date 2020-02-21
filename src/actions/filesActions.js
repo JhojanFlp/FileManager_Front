@@ -14,7 +14,8 @@ import {
     DELETE_ERROR,
     EDIT,
     EDIT_SUCCESS,
-    EDIT_ERROR
+    EDIT_ERROR,
+    SET_FILES
 } from '../types';
 
 import clientAxios from '../config/axios';
@@ -25,7 +26,7 @@ export function getFiles(){
     return async (dispatch) => {
         dispatch( downloadFiles() );
         try {
-            const f = await clientAxios.get('/files');
+            const f = await clientAxios.get('/show');
             dispatch( loadFilesSuccess(f.data) );
         } catch (error) {
             dispatch( loadFilesError(true) );
@@ -52,7 +53,8 @@ export function newFolder(folder){
     return async (dispatch) => {
         dispatch( addFolder() );
         try {
-            await clientAxios.post('/files', folder);
+            console.log(folder)
+            await clientAxios.get('/create/Folder', folder);
             dispatch( addFolderSuccess(folder) );
             dispatch(getFiles());
         } catch (error) {
@@ -166,4 +168,9 @@ const editSuccess = file => ({
 const editError = state => ({
     type: EDIT_ERROR,
     payload: state
+})
+
+export const setFiles = files => ({
+    type: SET_FILES,
+    files
 })

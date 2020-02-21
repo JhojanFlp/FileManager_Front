@@ -4,14 +4,13 @@ import Swal from 'sweetalert2';
 import { Button, Modal, ModalHeader, ModalBody, Form, Input, FormGroup, Alert, Label } from 'reactstrap';
 
 // Redux
-import { deleteElement } from '../../actions/filesActions';
 
 import Edit from '../operations/Edit';
 import Permissions from '../operations/Permissions';
+import deleteFilePost from '../../services/deleteFilePost';
+import {refreshPage} from '../../helpers/refreshPage';
 
 const Element = ({element}) => {
-
-    const { id } = element;
 
     // State store
     const error = useSelector( state => state.files.error );
@@ -20,12 +19,7 @@ const Element = ({element}) => {
         // TODO: Load files (list) se ingrese el path para acceder por el endpoint
     }
 
-    const dispatch = useDispatch();
-
-    // Delete
-    const del = id => dispatch( deleteElement(id) );
-
-    const deleteFile = id => {
+    const deleteFile = name => {
         Swal.fire({
             title: 'Estás seguro?',
             text: "Esta acción no podrá ser revertida!",
@@ -34,17 +28,18 @@ const Element = ({element}) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí, elimnar!'
-          }).then((result) => {
-            if (result.value) {
-                del( id );
-            }
+          }).then(() => {
+            deleteFilePost({
+                name
+            })
+            refreshPage();
           })
     }
 
     return (
         <div className="col-12 col-sm-6 col-md-4 col-lg-2 mb-3">
             <div className="card">
-                {element.type === "Folder"
+                {element.type === "folder"
                     ? <button
                         type="button"
                         className="btn"
@@ -65,7 +60,7 @@ const Element = ({element}) => {
                         </div>      
                     </div>
                     
-                    <Button color="danger" block onClick={() => deleteFile(id)}>Eliminar</Button>{' '}
+                    <Button color="danger" block onClick={() => deleteFile(element.name)}>Eliminar</Button>{' '}
                     <Edit 
                         element={element}
                     />
@@ -75,4 +70,4 @@ const Element = ({element}) => {
     );
 }
  
-export default Element;
+export default Element
